@@ -10,7 +10,7 @@ description:
     It is currently oriented for technically advanced users and is not an all-in-one package,
     but rather a "remote control" interface for a c-lightning node that has to be managed separately.
 
-    Sparks supports sending and receiving payments, viewing history, and managing channels.
+    Spark supports sending and receiving payments, viewing history, and managing channels.
 
     Spark is a purely off-chain wallet, with no on-chain payments.
     This allows Spark to fully realize the awesome UX enabled by lightning,
