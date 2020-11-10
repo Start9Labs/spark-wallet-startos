@@ -31,5 +31,6 @@ hidden-service-version: v3
 dependencies:
   c-lightning:
     version: ^0.9.1
+    description: Used to communicate with the Lightning Network.
     config: []
     mount-shared: true
