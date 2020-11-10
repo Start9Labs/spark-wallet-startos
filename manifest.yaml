@@ -1,19 +1,42 @@
 compat: v0
-id: hello-world
-version: 0.1.0
-title: hello-world
+id: spark-wallet
+version: 0.2.17
+title: Spark Wallet
 description:
-  short: "A simple, minimal project to serve as a template for creating an app for the Embassy."
-  long: "Hello World is a simple, minimal project to serve as a template for creating an app for the Embassy."
-release-notes: Initial release.
+  short: "A minimalistic wallet GUI for c-lightning."
+  long: |
+    Spark is a minimalistic wallet GUI for c-lightning, accessible over the web or
+    through mobile and desktop apps (for Android, Linux, macOS and Windows).
+    It is currently oriented for technically advanced users and is not an all-in-one package,
+    but rather a "remote control" interface for a c-lightning node that has to be managed separately.
+
+    Sparks supports sending and receiving payments, viewing history, and managing channels.
+
+    Spark is a purely off-chain wallet, with no on-chain payments.
+    This allows Spark to fully realize the awesome UX enabled by lightning,
+    without worrying about the complications and friction of on-chain.
+    This might change someday.
+
+    Spark has a responsive UI suitable for mobile, tablet and desktop devices,
+    but is best optimized for use on mobile.
+
+    > ⚠️ Spark is beta-quality software under active development, please use with care.
+
+    Big shout out to Blockstream for generously sponsoring this work!
+release-notes: https://github.com/shesek/spark-wallet/releases/tag/v0.2.17
 ports:
   - internal: 80
     tor: 80
 image:
   type: tar
-mount: /root
+mount: /root/.spark-wallet
 has-instructions: true
 os-version-required: ">=0.2.4"
 os-version-recommended: ">=0.2.4"
 assets: []
 hidden-service-version: v3
+dependencies:
+  c-lightning:
+    version: ^0.9.1
+    config: []
+    mount-shared: true

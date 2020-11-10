@@ -1,6 +1,6 @@
-# Wrapper for hello-world
+# Wrapper for spark-wallet
 
-`hello-world` is a simple, minimal project to serve as a template for creating an app for the Embassy.
+`spark-wallet` is a simple, minimal project to serve as a template for creating an app for the Embassy.
 
 ## Dependencies
 
@@ -16,8 +16,8 @@
 Clone the project locally. Note the submodule link to the original project(s). 
 
 ```
-git clone git@github.com:Start9Labs/hello-world-wrapper.git
-cd hello-world-wrapper
+git clone git@github.com:Start9Labs/spark-wallet-wrapper.git
+cd spark-wallet-wrapper
 ```
 
 ## Building
@@ -35,5 +35,5 @@ SSH into an Embassy device.
 Run the following command to determine successful install:
 
 ```
-appmgr install hello-world.s9pk
+appmgr install spark-wallet.s9pk
 ```

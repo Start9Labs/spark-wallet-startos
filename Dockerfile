@@ -1,13 +1,17 @@
-FROM alpine:3.12
+FROM node:alpine
+
+ARG SPARK_VERSION
 
 RUN apk update
 RUN apk add tini
 
-ADD ./hello-world/target/armv7-unknown-linux-musleabihf/release/hello-world /usr/local/bin/hello-world
+RUN npm install -g spark-wallet@${SPARK_VERSION}
+
+ADD ./configurator/target/armv7-unknown-linux-musleabihf/release/configurator /usr/local/bin/configurator
 ADD ./docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 RUN chmod a+x /usr/local/bin/docker_entrypoint.sh
 
-WORKDIR /root
+WORKDIR /root/.spark-wallet
 
 EXPOSE 80
 
