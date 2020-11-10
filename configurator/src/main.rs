@@ -39,7 +39,7 @@ fn main() -> Result<(), anyhow::Error> {
         serde_yaml::from_reader(File::open("/root/.spark-wallet/start9/config.yaml")?)?;
     let tor_address = std::env::var("TOR_ADDRESS")?;
     let mut mac = Hmac::<Sha256>::new_varkey(b"access-key").unwrap();
-    mac.update(format!("{}:{}", config.user, config.password));
+    mac.update(format!("{}:{}", config.user, config.password).as_bytes());
     let access_key = base64::encode(mac.finalize().into_bytes());
     {
         let mut outfile = File::create("/root/.spark-wallet/config")?;
