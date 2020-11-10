@@ -1,4 +1,4 @@
-login={user}:{password}
+login={user}:{password}:{access_key}
 no-tls=1
 public-url=http://{tor_address}
 host=0.0.0.0

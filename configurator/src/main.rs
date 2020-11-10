@@ -1,6 +1,8 @@
 use std::fs::File;
 use std::io::Write;
-use std::path::Path;
+
+use hmac::{Hmac, Mac, NewMac};
+use sha2::Sha256;
 
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "kebab-case")]
@@ -36,6 +38,9 @@ fn main() -> Result<(), anyhow::Error> {
     let config: Config =
         serde_yaml::from_reader(File::open("/root/.spark-wallet/start9/config.yaml")?)?;
     let tor_address = std::env::var("TOR_ADDRESS")?;
+    let mut mac = Hmac::<Sha256>::new_varkey(b"access-key").unwrap();
+    mac.update(format!("{}:{}", config.user, config.password));
+    let access_key = base64::encode(mac.finalize().into_bytes());
     {
         let mut outfile = File::create("/root/.spark-wallet/config")?;
 
@@ -44,16 +49,10 @@ fn main() -> Result<(), anyhow::Error> {
             include_str!("config.template"),
             user = config.user,
             password = config.password,
+            access_key = access_key,
             tor_address = tor_address,
         )?;
     }
-    #[cfg(target_os = "linux")]
-    nix::unistd::daemon(true, true)?;
-    let cookie_path = Path::new("/root/.spark-wallet/cookie");
-    while !cookie_path.exists() {
-        std::thread::sleep(std::time::Duration::from_secs(1));
-    }
-    let cookie = std::fs::read_to_string(cookie_path)?;
     serde_yaml::to_writer(
         File::create("/root/.spark-wallet/start9/stats.yaml")?,
         &Properties {
@@ -64,11 +63,7 @@ fn main() -> Result<(), anyhow::Error> {
                     value: format!(
                         "http://{tor_address}:80/?access-key={access_key}",
                         tor_address = tor_address,
-                        access_key = cookie
-                            .split(":")
-                            .skip(2)
-                            .next()
-                            .ok_or_else(|| anyhow::anyhow!("invalid cookie"))?,
+                        access_key = access_key,
                     ),
                     description: Some(
                         "Scan this with the Spark Wallet Mobile App to connect".to_owned(),
