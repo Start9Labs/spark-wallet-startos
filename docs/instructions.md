@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-Spark requires c-lightning to be installed and running on the EMbassy in order to function.
+Spark requires c-lightning to be installed and running on the Embassy in order to function.
 
 ## Usage Instructions
 

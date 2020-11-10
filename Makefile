@@ -14,8 +14,8 @@ spark-wallet.s9pk: manifest.yaml config_spec.yaml config_rules.yaml image.tar in
 	appmgr -vv pack $(shell pwd) -o spark-wallet.s9pk
 	appmgr -vv verify spark-wallet.s9pk
 
-instructions.md: README.md
-	cp doc/instructions.md instructions.md
+instructions.md: docs/instructions.md
+	cp docs/instructions.md instructions.md
 
 image.tar: Dockerfile docker_entrypoint.sh configurator/target/armv7-unknown-linux-musleabihf/release/configurator
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/spark-wallet --build-arg SPARK_VERSION=$(VERSION) --platform=linux/arm/v7 -o type=docker,dest=image.tar .
