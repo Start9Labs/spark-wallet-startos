@@ -4,3 +4,4 @@ public-url=http://{tor_address}
 host=0.0.0.0
 port=80
 ln-path=/root/.spark-wallet/start9/shared/c-lightning/lightning-rpc
+cookie-file=/root/.spark-wallet/cookie
