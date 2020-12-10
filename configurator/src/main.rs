@@ -40,10 +40,11 @@ fn main() -> Result<(), anyhow::Error> {
     let tor_address = std::env::var("TOR_ADDRESS")?;
     let mut mac = Hmac::<Sha256>::new_varkey(b"access-key").unwrap();
     mac.update(format!("{}:{}", config.user, config.password).as_bytes());
-    let access_key = base64::encode_config(
+    let b64_access_key = base64::encode_config(
         mac.finalize().into_bytes(),
         base64::Config::new(base64::CharacterSet::Standard, false),
     );
+    let access_key = regex::Regex::new("\\W+")?.replace_all(&b64_access_key, "");
     {
         let mut outfile = File::create("/root/.spark-wallet/config")?;
 
