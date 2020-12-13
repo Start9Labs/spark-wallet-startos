@@ -1,6 +1,6 @@
 compat: v0
 id: spark-wallet
-version: 0.2.17
+version: 0.2.17.1
 title: Spark Wallet
 description:
   short: "A minimalistic wallet GUI for c-lightning."
@@ -12,7 +12,7 @@ description:
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain.
     This might change someday.
-release-notes: https://github.com/shesek/spark-wallet/releases/tag/v0.2.17
+release-notes: Minor fix for access key
 ports:
   - internal: 80
     tor: 80
