@@ -100,7 +100,7 @@ fn main() -> Result<(), anyhow::Error> {
                         "Copy this password to login. Change this value in Config.".to_owned(),
                     ),
                     copyable: true,
-                    qr: true,
+                    qr: false,
                     masked: true,
                 },
             },
