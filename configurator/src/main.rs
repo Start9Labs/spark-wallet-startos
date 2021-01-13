@@ -58,7 +58,6 @@ fn main() -> Result<(), anyhow::Error> {
             tor_address = tor_address,
         )?;
     }
-    let config: Config = serde_yaml::from_reader(std::fs::File::open("/root/start9/config.yaml")?)?;
     serde_yaml::to_writer(
         File::create("/root/.spark-wallet/start9/stats.yaml")?,
         &Properties {
