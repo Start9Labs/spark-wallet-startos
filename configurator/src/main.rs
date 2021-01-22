@@ -77,19 +77,6 @@ fn main() -> Result<(), anyhow::Error> {
                     qr: true,
                     masked: true,
                 },
-                username: Property {
-                    value_type: "string",
-                    value: format!(
-                        "{}",
-                        config.user
-                    ),
-                    description: Some(
-                        "Copy this username to login. Change this value in Config.".to_owned(),
-                    ),
-                    copyable: true,
-                    qr: false,
-                    masked: true,
-                },
                 password: Property {
                     value_type: "string",
                     value: format!(
@@ -102,6 +89,19 @@ fn main() -> Result<(), anyhow::Error> {
                     copyable: true,
                     qr: false,
                     masked: true,
+                },
+                username: Property {
+                    value_type: "string",
+                    value: format!(
+                        "{}",
+                        config.user
+                    ),
+                    description: Some(
+                        "Copy this username to login. Change this value in Config.".to_owned(),
+                    ),
+                    copyable: true,
+                    qr: false,
+                    masked: false,
                 },
             },
         },
