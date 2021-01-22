@@ -21,6 +21,8 @@ pub struct Properties {
 pub struct Data {
     #[serde(rename = "Pairing URL")]
     pairing_url: Property<String>,
+    username: Property<String>,
+    password: Property<String>
 }
 
 #[derive(serde::Serialize)]
@@ -75,6 +77,32 @@ fn main() -> Result<(), anyhow::Error> {
                     copyable: true,
                     qr: true,
                     masked: true,
+                },
+                password: Property {
+                    value_type: "string",
+                    value: format!(
+                        "{}",
+                        config.password
+                    ),
+                    description: Some(
+                        "Copy this password to login. Change this value in Config.".to_owned(),
+                    ),
+                    copyable: true,
+                    qr: false,
+                    masked: true,
+                },
+                username: Property {
+                    value_type: "string",
+                    value: format!(
+                        "{}",
+                        config.user
+                    ),
+                    description: Some(
+                        "Copy this username to login. Change this value in Config.".to_owned(),
+                    ),
+                    copyable: true,
+                    qr: false,
+                    masked: false,
                 },
             },
         },
