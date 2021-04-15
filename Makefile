@@ -1,6 +1,6 @@
-ASSETS := $(shell yq r manifest.yaml assets.*.src)
+ASSETS := $(shell yq e '.assets.[].src' manifest.yaml)
 ASSET_PATHS := $(addprefix assets/,$(ASSETS))
-VERSION := $(shell yq r manifest.yaml version)
+VERSION := $(shell yq e '.version'  manifest.yaml)
 SPARK_VERSION := $(shell echo $(VERSION) | sed -E 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3/g')
 CONFIGURATOR_SRC := $(shell find ./configurator/src) configurator/Cargo.toml configurator/Cargo.lock
 
