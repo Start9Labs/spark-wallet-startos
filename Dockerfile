@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:current-alpine3.12
 
 ARG SPARK_VERSION
 
