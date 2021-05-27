@@ -1,6 +1,6 @@
 compat: v0
 id: spark-wallet
-version: 0.2.17.2
+version: 0.2.17.3
 title: Spark Wallet
 license-info:
   license: MIT
@@ -31,7 +31,7 @@ assets: []
 hidden-service-version: v3
 dependencies:
   c-lightning:
-    version: ^0.9.1
+    version: ">=0.9.1 <0.11.0" 
     description: Used to communicate with the Lightning Network.
     config: []
     mount-shared: true
