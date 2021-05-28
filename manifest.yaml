@@ -16,8 +16,7 @@ description:
     without worrying about the complications and friction of on-chain.
     This might change someday.
 release-notes: |
-  - Minor fix for access key
-  - Fixes an issue where public and shared directories would be backed up causing restores to fail
+  - Bumps version requirement to allow for c-lightning v0.10.0
 ports:
   - internal: 80
     tor: 80
@@ -31,7 +30,7 @@ assets: []
 hidden-service-version: v3
 dependencies:
   c-lightning:
-    version: ">=0.9.1 <0.11.0" 
+    version: ">=0.9.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
     config: []
     mount-shared: true
