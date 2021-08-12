@@ -1,10 +1,15 @@
 compat: v0
 id: spark-wallet
-version: 0.3.1
+version: 0.2.17.4
 title: Spark Wallet
+license: MIT
 license-info:
   license: MIT
   url: https://github.com/shesek/spark-wallet/blob/master/LICENSE
+wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
+upstream-repo: https://github.com/shesek/spark-wallet
+build: ["make"]
+min-os-version: 0.3.0
 description:
   short: "A minimalistic wallet GUI for c-lightning."
   long: |
@@ -15,22 +20,70 @@ description:
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain.
     This might change someday.
-release-notes: |
-  - Major release for Spark Wallet 0.3.1, with many updates, including Bolt12 support.
-ports:
-  - internal: 80
-    tor: 80
-image:
-  type: tar
-mount: /root/.spark-wallet
-has-instructions: true
-os-version-required: ">=0.2.5"
-os-version-recommended: ">=0.2.17"
-assets: []
-hidden-service-version: v3
+release-notes: Upgrade to EmbassyOS 0.3.0
+assets:
+  license: LICENSE
+  icon: icon.png
+  instructions: instructions.md
+  docker-images: image.tar
+  icon-type: png
+main:
+  type: docker
+  image: main
+  entrypoint: "/usr/local/bin/docker_entrypoint.sh"
+  args: []
+  mounts: {}
+  io-format: yaml
+health-checks: {}
+config:
+  get:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: config
+    args: 
+      - "get"
+      - "/root"
+    mounts: {}
+    io-format: yaml
+  set:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: config
+    args:
+      - "set"
+      - "/root"
+    mounts: {}
+    io-format: yaml
+volumes: {}
+interfaces:
+  main:
+    tor-config:
+      port-mapping:
+        80: "80"
+    ui: true
+    protocols:
+      - http
+backup:
+  create:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: "true"
+    args: []
+    mounts: {}
+  restore:
+    type: docker
+    image: compat
+    system: true
+    entrypoint: "true"
+    args: []
+    mounts: {} 
 dependencies:
   c-lightning:
     version: ">=0.10.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
-    config: []
+    # config: []
     mount-shared: true
+    critical: false
