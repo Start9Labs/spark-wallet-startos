@@ -1,10 +1,18 @@
+tor-address:
+  name: Network Tor Address
+  description: The Tor address for the network interface. 
+  type: pointer
+  subtype: package
+  package-id: spark-wallet
+  target: tor-address
+  interface: network
 user:
   type: string
   name: Username
   description: Username for logging in to Spark
   nullable: false
   pattern: '^[^\n:]+$'
-  patternDescription: May not contain newline or ":"
+  pattern-description: May not contain newline or ":"
   copyable: true
   default: spark
 password:
@@ -13,7 +21,7 @@ password:
   description: Password for logging in to Spark
   nullable: false
   pattern: '^[^\n:]+$'
-  patternDescription: May not contain newline or ":"
+  pattern-description: May not contain newline or ":"
   copyable: true
   masked: true
   default:
