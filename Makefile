@@ -3,17 +3,20 @@ ASSET_PATHS := $(addprefix assets/,$(ASSETS))
 VERSION := $(shell yq e '.version'  manifest.yaml)
 SPARK_VERSION := $(shell echo $(VERSION) | sed -E 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3/g')
 CONFIGURATOR_SRC := $(shell find ./configurator/src) configurator/Cargo.toml configurator/Cargo.lock
+S9PK_PATH=$(shell find . -name spark-wallet.s9pk -print)
 
 .DELETE_ON_ERROR:
 
-all: spark-wallet.s9pk
+all: verify
 
-install: spark-wallet.s9pk
-	appmgr install spark-wallet.s9pk
+verify: spark-wallet.s9pk $(S9PK_PATH)
+	embassy-sdk verify $(S9PK_PATH)
 
-spark-wallet.s9pk: manifest.yaml config_spec.yaml config_rules.yaml image.tar instructions.md icon.png $(ASSET_PATHS)
-	sudo $(which embassy-sdk) pack
-	sudo $(which embassy-sdk) verify spark-wallet.s9pk
+install: spark-wallet.s9pk 
+	embassy-cli package install spark-wallet
+
+spark-wallet.s9pk: manifest.yaml assets/compat/config_spec.yaml image.tar instructions.md icon.png LICENSE $(ASSET_PATHS)
+	embassy-sdk pack
 
 instructions.md: docs/instructions.md
 	cp docs/instructions.md instructions.md
