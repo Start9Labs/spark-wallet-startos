@@ -1,13 +1,12 @@
-compat: v0
 id: spark-wallet
 version: 0.2.17.4
 title: Spark Wallet
 license: MIT
-license-info:
-  license: MIT
-  url: https://github.com/shesek/spark-wallet/blob/master/LICENSE
 wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
 upstream-repo: https://github.com/shesek/spark-wallet
+donation-url: https://btcpay.shesek.info/
+marketing-site: https://github.com/shesek/spark-wallet
+support-site: https://github.com/shesek/spark-wallet/issues
 build: ["make"]
 min-os-version: 0.3.0
 description:
@@ -32,7 +31,8 @@ main:
   image: main
   entrypoint: "/usr/local/bin/docker_entrypoint.sh"
   args: []
-  mounts: {}
+  mounts:
+    c-lightning: /mnt/c-lightning
   io-format: yaml
 health-checks: {}
 config:
@@ -40,11 +40,15 @@ config:
     type: docker
     image: compat
     system: true
-    entrypoint: config
-    args: 
+    entrypoint: compat
+    args:
+      - "config"
       - "get"
-      - "/root"
-    mounts: {}
+      - "/root/.spark-wallet/start9/config/yaml"
+      - "/mnt/assets/config_spec.yaml"
+    mounts:
+      compat: "/mnt/assets"
+      main: "/root/.spark-wallet"
     io-format: yaml
   set:
     type: docker
@@ -52,38 +56,70 @@ config:
     system: true
     entrypoint: config
     args:
+      - "config"
       - "set"
-      - "/root"
-    mounts: {}
+      - "/root/.spark-wallet/start9/config/yaml"
+    mounts:
+      main: "/root/.spark-wallet"
     io-format: yaml
-volumes: {}
+volumes:
+  main: 
+    type: data
+  compat:
+    type: assets
+  c-lightning:
+    type: pointer
+    package-id: c-lightning
+    volume-id: main
+    path: "/root/.lnd"
+    readonly: true
+alerts: {}
 interfaces:
-  main:
+  network:
+    name: Network Interface
+    description: Specified the interfaces to listen on for HTTP connections.
     tor-config:
       port-mapping:
         80: "80"
+    lan-config:
+      80:
+        ssl: true
+        mapping: 443
     ui: true
     protocols:
+      - tcp
       - http
 backup:
   create:
     type: docker
     image: compat
     system: true
-    entrypoint: "true"
-    args: []
-    mounts: {}
+    entrypoint: compat
+    args:
+      - duplicity
+      - spark-wallet
+      - /root/.spark-wallet
+      - file:///mnt/backup
+    mounts:
+      BACKUP: /mnt/backup
+      main: /root/.spark-wallet
   restore:
     type: docker
     image: compat
     system: true
-    entrypoint: "true"
-    args: []
-    mounts: {} 
+    entrypoint: compat
+    args:
+      - duplicity
+      - spark-wallet
+      - file:///mnt/backup
+      - /root/spark-wallet
+    mounts:
+      BACKUP: /mnt/backup
+      main: /root/.spark-wallet
 dependencies:
   c-lightning:
     version: ">=0.9.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
-    # config: []
-    mount-shared: true
     critical: false
+    recommended: true
+    config: null
