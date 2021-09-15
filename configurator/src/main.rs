@@ -7,6 +7,7 @@ use sha2::Sha256;
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "kebab-case")]
 struct Config {
+    tor_address: String,
     user: String,
     password: String,
 }
@@ -39,7 +40,7 @@ pub struct Property<T> {
 fn main() -> Result<(), anyhow::Error> {
     let config: Config =
         serde_yaml::from_reader(File::open("/root/.spark-wallet/start9/config.yaml")?)?;
-    let tor_address = std::env::var("TOR_ADDRESS")?;
+    let tor_address = config.tor_address;
     let mut mac = Hmac::<Sha256>::new_varkey(b"access-key").unwrap();
     mac.update(format!("{}:{}", config.user, config.password).as_bytes());
     let b64_access_key = base64::encode_config(
