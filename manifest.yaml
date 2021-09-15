@@ -25,16 +25,25 @@ assets:
   icon: icon.png
   instructions: instructions.md
   docker-images: image.tar
-  icon-type: png
 main:
   type: docker
   image: main
-  entrypoint: "/usr/local/bin/docker_entrypoint.sh"
+  entrypoint: docker_entrypoint.sh
   args: []
   mounts:
-    c-lightning: /mnt/c-lightning
+    main: /root/.spark-wallet
   io-format: yaml
-health-checks: {}
+health-checks:
+  main: 
+    type: docker
+    image: main
+    system: false
+    entrypoint: sh
+    args: ["-c", "curl http://localhost:80 || exit 1"]
+    mounts:
+      main: /root/.spark-wallet
+    io-format: yaml
+    critical: true
 config:
   get:
     type: docker
@@ -42,26 +51,41 @@ config:
     system: true
     entrypoint: compat
     args:
-      - "config"
-      - "get"
-      - "/root/.spark-wallet/start9/config/yaml"
+      - config
+      - get
+      - "/root/.spark-wallet"
       - "/mnt/assets/config_spec.yaml"
     mounts:
-      compat: "/mnt/assets"
+      compat: /mnt/assets
       main: "/root/.spark-wallet"
     io-format: yaml
   set:
     type: docker
     image: compat
     system: true
-    entrypoint: config
+    entrypoint: compat
     args:
-      - "config"
-      - "set"
-      - "/root/.spark-wallet/start9/config/yaml"
+      - config
+      - set
+      - "spark-wallet"
+      - "/root/.spark-wallet"
+      - "/mnt/assets/config_rules.yaml"
     mounts:
       main: "/root/.spark-wallet"
+      compat: /mnt/assets
     io-format: yaml
+properties:
+  type: docker
+  image: compat
+  system: true
+  entrypoint: compat
+  args:
+    - properties
+    - /root/.spark-wallet
+  mounts:
+    main: /root/.spark-wallet
+    compat: /mnt/assets
+  io-format: yaml
 volumes:
   main: 
     type: data
@@ -97,9 +121,10 @@ backup:
     entrypoint: compat
     args:
       - duplicity
+      - create
       - spark-wallet
+      - /mnt/backup
       - /root/.spark-wallet
-      - file:///mnt/backup
     mounts:
       BACKUP: /mnt/backup
       main: /root/.spark-wallet
@@ -110,8 +135,9 @@ backup:
     entrypoint: compat
     args:
       - duplicity
+      - restore
       - spark-wallet
-      - file:///mnt/backup
+      - /mnt/backup
       - /root/spark-wallet
     mounts:
       BACKUP: /mnt/backup
@@ -120,6 +146,6 @@ dependencies:
   c-lightning:
     version: ">=0.9.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
-    critical: false
+    critical: true
     recommended: true
-    config: null
+    config: ~
