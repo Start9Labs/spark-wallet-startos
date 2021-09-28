@@ -147,5 +147,6 @@ dependencies:
     version: ">=0.9.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
     critical: true
-    recommended: true
+    requirement:
+      type: required
     config: ~
