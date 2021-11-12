@@ -32,6 +32,7 @@ main:
   args: []
   mounts:
     main: /root/.spark-wallet
+    c-lightning: /mnt/c-lightning/shared
   io-format: yaml
 health-checks:
   main: 
@@ -40,7 +41,7 @@ health-checks:
     entrypoint: sh
     args: ["-c", "curl spark-wallet.embassy:80 || exit 1"]
     io-format: yaml
-    critical: true
+    critical: false
     inject: true
 config:
   get:
@@ -93,7 +94,7 @@ volumes:
     type: pointer
     package-id: c-lightning
     volume-id: main
-    path: "/root/.lightning"
+    path: /shared
     readonly: true
 alerts: {}
 interfaces:
