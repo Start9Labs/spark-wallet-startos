@@ -83,7 +83,6 @@ properties:
     - /root/.spark-wallet
   mounts:
     main: /root/.spark-wallet
-    compat: /mnt/assets
   io-format: yaml
 volumes:
   main: 
