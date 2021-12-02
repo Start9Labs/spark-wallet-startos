@@ -1,6 +1,6 @@
 compat: v0
 id: spark-wallet
-version: 0.2.17.3
+version: 0.3.1
 title: Spark Wallet
 license-info:
   license: MIT
@@ -16,7 +16,7 @@ description:
     without worrying about the complications and friction of on-chain.
     This might change someday.
 release-notes: |
-  - Bumps version requirement to allow for c-lightning v0.10.0
+  - Major release for Spark Wallet 0.3.1, with many updates, including Bolt12 support.
 ports:
   - internal: 80
     tor: 80
@@ -25,12 +25,12 @@ image:
 mount: /root/.spark-wallet
 has-instructions: true
 os-version-required: ">=0.2.5"
-os-version-recommended: ">=0.2.5"
+os-version-recommended: ">=0.2.17"
 assets: []
 hidden-service-version: v3
 dependencies:
   c-lightning:
-    version: ">=0.9.1 <0.11.0"
+    version: ">=0.10.0 <0.11.0"
     description: Used to communicate with the Lightning Network.
     config: []
     mount-shared: true
