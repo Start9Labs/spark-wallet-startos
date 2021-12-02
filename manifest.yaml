@@ -1,5 +1,5 @@
 id: spark-wallet
-version: 0.2.17.4
+version: 0.3.1
 title: Spark Wallet
 license: MIT
 wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
@@ -144,7 +144,7 @@ backup:
     io-format: yaml
 dependencies:
   c-lightning:
-    version: ">=0.9.1 <0.11.0"
+    version: ">=0.10.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
     critical: true
     requirement:
