@@ -98,9 +98,9 @@ volumes:
     readonly: true
 alerts: {}
 interfaces:
-  network:
-    name: Network Interface
-    description: Specified the interfaces to listen on for HTTP connections.
+  main:
+    name: Web Interface
+    description: Main user interface for interacting with Spark in a web browser.
     tor-config:
       port-mapping:
         80: "80"
