@@ -1,11 +1,11 @@
 tor-address:
-  name: Network Tor Address
-  description: The Tor address for the network interface. 
+  name: Main Tor Address
+  description: The Tor address for the main interface.
   type: pointer
   subtype: package
   package-id: spark-wallet
   target: tor-address
-  interface: network
+  interface: main
 user:
   type: string
   name: Username
