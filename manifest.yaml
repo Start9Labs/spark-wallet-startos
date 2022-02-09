@@ -86,7 +86,7 @@ properties:
     main: /root/.spark-wallet
   io-format: yaml
 volumes:
-  main: 
+  main:
     type: data
   compat:
     type: assets
@@ -105,9 +105,9 @@ interfaces:
       port-mapping:
         80: "80"
     lan-config:
-      80:
+      443:
         ssl: true
-        mapping: 443
+        internal: 80
     ui: true
     protocols:
       - tcp
