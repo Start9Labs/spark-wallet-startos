@@ -25,5 +25,4 @@ image.tar: Dockerfile docker_entrypoint.sh configurator/target/aarch64-unknown-l
 
 configurator/target/aarch64-unknown-linux-musl/release/configurator: $(CONFIGURATOR_SRC)
 	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/configurator:/home/rust/src start9/rust-musl-cross:aarch64-musl cargo +beta build --release
-	docker run --rm -it -v ~/.cargo/registry:/root/.cargo/registry -v "$(shell pwd)"/configurator:/home/rust/src start9/rust-musl-cross:aarch64-musl musl-strip target/aarch64-unknown-linux-musl/release/configurator
 
