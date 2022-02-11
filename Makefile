@@ -9,7 +9,7 @@ S9PK_PATH=$(shell find . -name spark-wallet.s9pk -print)
 all: verify
 
 verify: spark-wallet.s9pk $(S9PK_PATH)
-	embassy-sdk verify $(S9PK_PATH)
+	embassy-sdk verify s9pk $(S9PK_PATH)
 
 install: spark-wallet.s9pk 
 	embassy-cli package install spark-wallet
