@@ -7,6 +7,7 @@ use sha2::Sha256;
 #[derive(serde::Deserialize)]
 #[serde(rename_all = "kebab-case")]
 struct Config {
+    tor_address: String,
     user: String,
     password: String,
 }
@@ -22,7 +23,7 @@ pub struct Data {
     #[serde(rename = "Pairing URL")]
     pairing_url: Property<String>,
     username: Property<String>,
-    password: Property<String>
+    password: Property<String>,
 }
 
 #[derive(serde::Serialize)]
@@ -39,7 +40,7 @@ pub struct Property<T> {
 fn main() -> Result<(), anyhow::Error> {
     let config: Config =
         serde_yaml::from_reader(File::open("/root/.spark-wallet/start9/config.yaml")?)?;
-    let tor_address = std::env::var("TOR_ADDRESS")?;
+    let tor_address = config.tor_address;
     let mut mac = Hmac::<Sha256>::new_varkey(b"access-key").unwrap();
     mac.update(format!("{}:{}", config.user, config.password).as_bytes());
     let b64_access_key = base64::encode_config(
@@ -80,10 +81,7 @@ fn main() -> Result<(), anyhow::Error> {
                 },
                 password: Property {
                     value_type: "string",
-                    value: format!(
-                        "{}",
-                        config.password
-                    ),
+                    value: format!("{}", config.password),
                     description: Some(
                         "Copy this password to login. Change this value in Config.".to_owned(),
                     ),
@@ -93,10 +91,7 @@ fn main() -> Result<(), anyhow::Error> {
                 },
                 username: Property {
                     value_type: "string",
-                    value: format!(
-                        "{}",
-                        config.user
-                    ),
+                    value: format!("{}", config.user),
                     description: Some(
                         "Copy this username to login. Change this value in Config.".to_owned(),
                     ),

@@ -3,11 +3,11 @@ FROM node:current-alpine3.12
 ARG SPARK_VERSION
 
 RUN apk update
-RUN apk add tini
+RUN apk add tini curl
 
 RUN npm install -g spark-wallet@${SPARK_VERSION}
 
-ADD ./configurator/target/armv7-unknown-linux-musleabihf/release/configurator /usr/local/bin/configurator
+ADD ./configurator/target/aarch64-unknown-linux-musl/release/configurator /usr/local/bin/configurator
 ADD ./docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 RUN chmod a+x /usr/local/bin/docker_entrypoint.sh
 
