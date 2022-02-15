@@ -37,12 +37,21 @@ main:
 health-checks:
   web-ui:
     name: Web UI
-    description: Activates once your Spark Web UI is ready to visit
+    description: Activates once your Spark Web UI is ready to visit.
     type: docker
     image: main
-    entrypoint: sh
-    args: ["-c", "curl spark-wallet.embassy:80 || exit 1"]
-    io-format: yaml
+    entrypoint: health-check.sh
+    args: ["web"]
+    io-format: json
+    inject: true
+  cli:
+    name: Command Interface
+    description: Ensures the command line interface is accessible and functioning.
+    type: docker
+    image: main
+    entrypoint: health-check.sh
+    args: ["api"]
+    io-format: json
     inject: true
 config:
   get:
