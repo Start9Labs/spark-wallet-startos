@@ -3,7 +3,7 @@ FROM node:current-alpine3.12
 ARG SPARK_VERSION
 
 RUN apk update
-RUN apk add tini curl jq
+RUN apk add tini curl jq socat
 
 RUN npm install -g spark-wallet@${SPARK_VERSION}
 
