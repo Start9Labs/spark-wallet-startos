@@ -19,7 +19,8 @@ check_web(){
     if (($DURATION <= 15000 )); then 
         exit 60
     else
-        curl --silent --fail spark-wallet.embassy:80
+        # do not add --fail here as this will return an exit code of 22 for Unauthorized
+        curl --silent spark-wallet.embassy &>/dev/null
         RES=$?
         if test "$RES" != 0; then
             echo "Web interface is unreachable" >&2

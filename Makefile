@@ -20,7 +20,7 @@ spark-wallet.s9pk: manifest.yaml image.tar instructions.md icon.png LICENSE $(AS
 instructions.md: docs/instructions.md
 	cp docs/instructions.md instructions.md
 
-image.tar: Dockerfile docker_entrypoint.sh configurator/target/aarch64-unknown-linux-musl/release/configurator
+image.tar: Dockerfile docker_entrypoint.sh health-check.sh configurator/target/aarch64-unknown-linux-musl/release/configurator
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/spark-wallet/main:${EMVER} --build-arg SPARK_VERSION=$(SPARK_VERSION) --platform=linux/arm64 -o type=docker,dest=image.tar .
 
 configurator/target/aarch64-unknown-linux-musl/release/configurator: $(CONFIGURATOR_SRC)
