@@ -5,7 +5,7 @@ check_api(){
     if (($DURATION <= 5000 )); then 
         exit 60
     else
-        spark-wallet --version
+        spark-wallet --version &>/dev/null
         RES=$?
         if test "$RES" != 0; then
             echo "API is unreachable" >&2
