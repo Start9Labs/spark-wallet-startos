@@ -37,7 +37,7 @@ main:
 health-checks:
   web-ui:
     name: Web UI
-    description: Activates once your Spark Web UI is ready to visit.
+    success-message: The Web UI is ready to visit
     type: docker
     image: main
     entrypoint: health-check.sh
@@ -46,7 +46,7 @@ health-checks:
     inject: true
   cli:
     name: Command Interface
-    description: Ensures the command line interface is accessible and functioning.
+    success-message: The command line interface is operational
     type: docker
     image: main
     entrypoint: health-check.sh
