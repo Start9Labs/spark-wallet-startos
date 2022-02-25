@@ -17,8 +17,7 @@ description:
 
     Spark is a purely off-chain wallet, with no on-chain payments.
     This allows Spark to fully realize the awesome UX enabled by lightning,
-    without worrying about the complications and friction of on-chain.
-    This might change someday.
+    without worrying about the complications and friction of on-chain payments.
 release-notes: Upgrade to EmbassyOS 0.3.0
 assets:
   license: LICENSE
