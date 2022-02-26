@@ -36,7 +36,7 @@ main:
 health-checks:
   web-ui:
     name: Web UI
-    success-message: The Web UI is ready to visit from a web browser
+    success-message: Spark wallet is ready to visit in a web browser
     type: docker
     image: main
     entrypoint: health-check.sh
