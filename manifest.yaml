@@ -8,7 +8,6 @@ donation-url: https://btcpay.shesek.info/
 marketing-site: https://github.com/shesek/spark-wallet
 support-site: https://github.com/shesek/spark-wallet/issues
 build: ["make"]
-min-os-version: 0.3.0
 description:
   short: "A minimalistic wallet GUI for c-lightning."
   long: |
@@ -153,7 +152,6 @@ dependencies:
   c-lightning:
     version: ">=0.10.1 <0.11.0"
     description: Used to communicate with the Lightning Network.
-    critical: true
     requirement:
       type: required
     config: ~
