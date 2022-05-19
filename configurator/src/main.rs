@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::Write;
 
-use hmac::{Hmac, Mac, NewMac};
+use hmac::{Hmac, Mac};
 use sha2::Sha256;
 
 #[derive(serde::Deserialize)]
@@ -41,7 +41,7 @@ fn main() -> Result<(), anyhow::Error> {
     let config: Config =
         serde_yaml::from_reader(File::open("/root/.spark-wallet/start9/config.yaml")?)?;
     let tor_address = config.tor_address;
-    let mut mac = Hmac::<Sha256>::new_varkey(b"access-key").unwrap();
+    let mut mac = Hmac::<Sha256>::new_from_slice(b"access-key").unwrap();
     mac.update(format!("{}:{}", config.user, config.password).as_bytes());
     let b64_access_key = base64::encode_config(
         mac.finalize().into_bytes(),
