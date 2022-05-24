@@ -1,5 +1,5 @@
 id: spark-wallet
-version: 0.3.1.1
+version: 0.3.1.2
 title: Spark Wallet
 license: MIT
 wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
@@ -9,15 +9,15 @@ marketing-site: https://github.com/shesek/spark-wallet
 support-site: https://github.com/shesek/spark-wallet/issues
 build: ["make"]
 description:
-  short: "A minimalistic wallet GUI for c-lightning."
+  short: "A minimalistic wallet GUI for Core Lightning (CLN)."
   long: |
-    Spark is a minimalistic wallet GUI for c-lightning. It supports sending and
+    Spark is a minimalistic wallet GUI for Core Lightning (CLN). It supports sending and
     receiving payments, viewing history, and managing channels.
 
     Spark is a purely off-chain wallet, with no on-chain payments.
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain payments.
-release-notes: Upgrade to EmbassyOS 0.3.0
+release-notes: Patch release to increment CLN dependency version requirement
 assets:
   license: LICENSE
   icon: icon.png
@@ -150,7 +150,7 @@ backup:
     io-format: yaml
 dependencies:
   c-lightning:
-    version: ">=0.10.1 <0.11.0"
+    version: ">=0.10.1 <0.12.0"
     description: Used to communicate with the Lightning Network.
     requirement:
       type: required

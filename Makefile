@@ -8,6 +8,10 @@ S9PK_PATH=$(shell find . -name spark-wallet.s9pk -print)
 
 all: verify
 
+clean:
+	rm spark-wallet.s9pk
+	rm image.tar
+
 verify: spark-wallet.s9pk $(S9PK_PATH)
 	embassy-sdk verify s9pk $(S9PK_PATH)
 
