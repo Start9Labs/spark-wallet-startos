@@ -155,3 +155,22 @@ dependencies:
     requirement:
       type: required
     config: ~
+migrations:
+  from:
+    "<0.3.1.2":
+      type: docker
+      image: main
+      system: false
+      entrypoint: "/bin/echo"
+      args: ['{"configured": true}']
+      io-format: json
+      inject: false
+  to:
+    "<0.3.1.2":
+      type: docker
+      image: main
+      system: false
+      entrypoint: "/bin/echo"
+      args: ['{"configured": true}']
+      io-format: json
+      inject: false
