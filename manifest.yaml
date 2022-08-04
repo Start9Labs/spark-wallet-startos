@@ -1,5 +1,5 @@
 id: spark-wallet
-version: 0.3.1.2
+version: 0.3.1.3
 title: Spark Wallet
 license: MIT
 wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
@@ -157,7 +157,7 @@ dependencies:
     config: ~
 migrations:
   from:
-    "<0.3.1.2":
+    "<0.3.1.3":
       type: docker
       image: main
       system: false
@@ -166,7 +166,7 @@ migrations:
       io-format: json
       inject: false
   to:
-    "<0.3.1.2":
+    "<0.3.1.3":
       type: docker
       image: main
       system: false
