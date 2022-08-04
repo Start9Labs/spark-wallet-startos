@@ -22,7 +22,13 @@ pub struct Properties {
 pub struct Data {
     #[serde(rename = "Pairing URL")]
     pairing_url: Property<String>,
+    #[serde(rename = "Server URL")]
+    server_url: Property<String>,
+    #[serde(rename = "Access Key")]
+    access_key: Property<String>,
+    #[serde(rename = "Username")]
     username: Property<String>,
+    #[serde(rename = "Password")]
     password: Property<String>,
 }
 
@@ -77,6 +83,32 @@ fn main() -> Result<(), anyhow::Error> {
                     ),
                     copyable: true,
                     qr: true,
+                    masked: true,
+                },
+                server_url: Property {
+                    value_type: "string",
+                    value: format!(
+                        "http://{tor_address}:80/",
+                        tor_address = tor_address,
+                    ),
+                    description: Some(
+                        "Enter this into the \"Server URL\" text field of the Spark Wallet Mobile App's Server Settings dialog to connect".to_owned(),
+                    ),
+                    copyable: true,
+                    qr: false,
+                    masked: false,
+                },
+                access_key: Property {
+                    value_type: "string",
+                    value: format!(
+                        "{access_key}",
+                        access_key = access_key,
+                    ),
+                    description: Some(
+                        "Enter this into the \"Access Key\" text field of the Spark Wallet Mobile App's Server Settings dialog to connect".to_owned(),
+                    ),
+                    copyable: true,
+                    qr: false,
                     masked: true,
                 },
                 password: Property {
