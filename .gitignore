@@ -1,4 +1,4 @@
 spark-wallet.s9pk
 image.tar
 .vscode
-./scripts/embassy.js
+scripts/embassy.js
