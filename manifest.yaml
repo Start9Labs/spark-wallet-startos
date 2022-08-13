@@ -157,20 +157,10 @@ dependencies:
     config: ~
 migrations:
   from:
-    "<0.3.1.4":
-      type: docker
-      image: main
-      system: false
-      entrypoint: "/bin/echo"
-      args: ['{"configured": true}']
-      io-format: json
-      inject: false
+    "*":
+      type: script
+      args: ["from"]
   to:
-    "<0.3.1.4":
-      type: docker
-      image: main
-      system: false
-      entrypoint: "/bin/echo"
-      args: ['{"configured": true}']
-      io-format: json
-      inject: false
+    "*":
+      type: script
+      args: ["to"]

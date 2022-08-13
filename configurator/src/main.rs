@@ -74,7 +74,7 @@ fn main() -> Result<(), anyhow::Error> {
                 pairing_url: Property {
                     value_type: "string",
                     value: format!(
-                        "http://{tor_address}:80/?access-key={access_key}",
+                        "http://{tor_address}/?access-key={access_key}",
                         tor_address = tor_address,
                         access_key = access_key,
                     ),
@@ -88,7 +88,7 @@ fn main() -> Result<(), anyhow::Error> {
                 server_url: Property {
                     value_type: "string",
                     value: format!(
-                        "http://{tor_address}:80/",
+                        "http://{tor_address}/",
                         tor_address = tor_address,
                     ),
                     description: Some(
