@@ -18,7 +18,7 @@ verify: spark-wallet.s9pk $(S9PK_PATH)
 install: all spark-wallet.s9pk
 	embassy-cli package install spark-wallet.s9pk
 
-spark-wallet.s9pk: manifest.yaml image.tar instructions.md icon.png LICENSE $(ASSET_PATHS)  scripts/embassy.js
+spark-wallet.s9pk: manifest.yaml image.tar instructions.md icon.png LICENSE scripts/embassy.js
 	embassy-sdk pack
 
 instructions.md: docs/instructions.md

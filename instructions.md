@@ -18,6 +18,6 @@ Spark requires Core Lightning to be installed and running on the Embassy in orde
 
 ### Android
 
-1. Repeat the `Linux, MacOS and Windows` steps above, but before step 2, make sure Orbot is installed, with *VPN Mode* enabled, and that Spark Wallet is among Orbot's VPN Mode *Tor-Enabled Apps*.
+1. Repeat the `Linux, MacOS and Windows` steps above, but before step 2, make sure Orbot is installed, with [*VPN Mode* enabled](https://start9.com/latest/user-manual/connecting/connecting-tor/tor-os/tor-android#orbot-vpn-mode), and that Spark Wallet is among Orbot's VPN Mode *Tor-Enabled Apps*.
 
 For more detailed instructions on how to use Spark Wallet and the Lightning Network, see the official Spark [documentation](https://github.com/shesek/spark-wallet).
