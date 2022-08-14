@@ -1,4 +1,3 @@
-ASSET_PATHS := $(shell find ./assets/*)
 EMVER := $(shell yq e '.version'  manifest.yaml)
 SPARK_VERSION := $(shell echo $(EMVER) | sed -E 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3/g')
 CONFIGURATOR_SRC := $(shell find ./configurator/src) configurator/Cargo.toml configurator/Cargo.lock
