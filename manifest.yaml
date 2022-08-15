@@ -17,7 +17,10 @@ description:
     Spark is a purely off-chain wallet, with no on-chain payments.
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain payments.
-release-notes: Patch release to increment CLN dependency version requirement
+release-notes: |
+  * Patch wrapper to increment CLN dependency version requirement
+  * Tidy up Properties page and add a couple new properties for users' clarity
+  * Docker migrations now converted to TS
 assets:
   license: LICENSE
   icon: icon.png
@@ -53,50 +56,14 @@ health-checks:
     inject: true
 config:
   get:
-    type: docker
-    image: compat
-    system: true
-    entrypoint: compat
-    args:
-      - config
-      - get
-      - "/root/.spark-wallet"
-      - "/mnt/assets/config_spec.yaml"
-    mounts:
-      compat: /mnt/assets
-      main: "/root/.spark-wallet"
-    io-format: yaml
+    type: script
   set:
-    type: docker
-    image: compat
-    system: true
-    entrypoint: compat
-    args:
-      - config
-      - set
-      - "spark-wallet"
-      - "/root/.spark-wallet"
-      - "/mnt/assets/config_rules.yaml"
-    mounts:
-      main: "/root/.spark-wallet"
-      compat: /mnt/assets
-    io-format: yaml
+    type: script
 properties:
-  type: docker
-  image: compat
-  system: true
-  entrypoint: compat
-  args:
-    - properties
-    - /root/.spark-wallet
-  mounts:
-    main: /root/.spark-wallet
-  io-format: yaml
+  type: script
 volumes:
   main:
     type: data
-  compat:
-    type: assets
   c-lightning:
     type: pointer
     package-id: c-lightning

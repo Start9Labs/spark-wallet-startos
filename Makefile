@@ -1,4 +1,3 @@
-ASSET_PATHS := $(shell find ./assets/*)
 EMVER := $(shell yq e '.version'  manifest.yaml)
 SPARK_VERSION := $(shell echo $(EMVER) | sed -E 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3/g')
 CONFIGURATOR_SRC := $(shell find ./configurator/src) configurator/Cargo.toml configurator/Cargo.lock
@@ -19,7 +18,7 @@ verify: spark-wallet.s9pk $(S9PK_PATH)
 install: all spark-wallet.s9pk
 	embassy-cli package install spark-wallet.s9pk
 
-spark-wallet.s9pk: manifest.yaml image.tar instructions.md icon.png LICENSE $(ASSET_PATHS)  scripts/embassy.js
+spark-wallet.s9pk: manifest.yaml image.tar instructions.md icon.png LICENSE scripts/embassy.js
 	embassy-sdk pack
 
 instructions.md: docs/instructions.md
