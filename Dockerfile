@@ -7,7 +7,7 @@ RUN apk add tini curl jq bash socat
 
 RUN npm install -g spark-wallet@${SPARK_VERSION}
 
-ADD ./configurator/target/aarch64-unknown-linux-musl/release/configurator /usr/local/bin/configurator
+ADD ./configurator/target/x86_64-unknown-linux-musl/release/configurator /usr/local/bin/configurator
 ADD ./docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 RUN chmod a+x /usr/local/bin/docker_entrypoint.sh
 COPY ./health-check.sh /usr/local/bin/health-check.sh

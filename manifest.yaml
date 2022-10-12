@@ -1,5 +1,5 @@
 id: spark-wallet
-version: 0.3.1.4
+version: 0.3.2.0
 title: Spark Wallet
 license: MIT
 wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
@@ -18,9 +18,7 @@ description:
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain payments.
 release-notes: |
-  * Patch wrapper to increment CLN dependency version requirement
-  * Tidy up Properties page and add a couple new properties for users' clarity
-  * Docker migrations now converted to TS
+  * Update Spark Wallet to run on x86 architecture
 assets:
   license: LICENSE
   icon: icon.png
