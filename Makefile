@@ -1,6 +1,7 @@
 PKG_ID := $(shell yq e '.id' manifest.yaml)
-EMVER := $(shell yq e '.version'  manifest.yaml)
-UPSTREAM_VERSION := $(shell echo $(EMVER) | sed -E 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3-rc/g')
+PKG_VERSION := $(shell yq e '.version' manifest.yaml)
+UPSTREAM_VERSION := $(shell echo $(PKG_VERSION) | sed -E 's/^([0-9]+)\.([0-9]+)\.([0-9]+).*/\1.\2.\3-rc/g')
+
 TS_FILES := $(shell find . -name \*.ts )
 CONFIGURATOR_SRC := $(shell find ./configurator/src) configurator/Cargo.toml configurator/Cargo.lock
 
