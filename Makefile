@@ -35,11 +35,11 @@ $(PKG_ID).s9pk: manifest.yaml instructions.md scripts/embassy.js LICENSE docker-
 
 docker-images/aarch64.tar: Dockerfile docker_entrypoint.sh
 	mkdir -p docker-images
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/arm64 -o type=docker,dest=docker-images/aarch64.tar .
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/arm64 --build-arg PLATFORM=arm64 --build-arg ARCH=aarch64 -o type=docker,dest=docker-images/aarch64.tar .
 
 docker-images/x86_64.tar: Dockerfile docker_entrypoint.sh
 	mkdir -p docker-images
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/amd64 -o type=docker,dest=docker-images/x86_64.tar .
+	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/amd64 --build-arg PLATFORM=amd64 --build-arg ARCH=x86_64 -o type=docker,dest=docker-images/x86_64.tar .
 
 scripts/embassy.js: $(TS_FILES)
 	deno bundle scripts/embassy.ts scripts/embassy.js
