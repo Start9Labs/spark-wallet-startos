@@ -1,25 +1,19 @@
-# Usage Instructions
+# Spark Wallet
 
-## Browser
+## Dependencies
 
-1. In your Embassy Spark Wallet dashboard, click the "Launch UI" button. You can also copy/paste your LAN (.local) or Tor (.onion) address from inside the `Interfaces` section.
-1. Visit the `Properties` section and copy/paste your _username_ and _password_ into your Spark Wallet UI. Your username and password can be changed inside the `Config` section.
+Spark requires c-lightning to be installed and running on the Embassy in order to function.
 
-## Desktop
+## Usage Instructions
 
-_Linux, Mac, Windows_
+### Browser
 
-1. Follow [instructions](https://start9.com/latest/user-manual/connecting/connecting-tor/tor-os/) to run Tor on your device.
-1. Download the Spark Wallet app for [your platform](https://github.com/shesek/spark-wallet/releases).
-1. Visit the `Properties` section inside your Emabssy Spark Wallet console and copy/paste *Server URL* and *Access Key* into the Spark Wallet desktop app.
+1. Navigate to your Spark Tor Address (.onion URL) from any Tor-enabled browser.
+1. Insert your username and password, located in `Properties`. These values can be changed in `Config`.
 
-## Mobile
+### Android, Linux, macOS and Windows
 
-_Android Only_ (not available on iOS)
+1. Download the native Spark Wallet application for your platform (not yet available for iOS)
+1. Insert your Spark Tor Address (.onion URL), as well as your username and password, located in `Properties`. Username and password can be changed in `Config`.
 
-1. Follow [instructions](https://start9.com/latest/user-manual/connecting/connecting-tor/tor-os/tor-android) to run Tor on your Android device.
-1. Download the Spark app from its [Github Page](https://github.com/shesek/spark-wallet/releases). You can also install the Spark app from the Google Play Store, but be careful, there is an imposter app out there.
-1. Visit the `Properties` section inside your Emabssy Spark Wallet console and copy/paste *Server URL* and *Access Key* into the Spark Wallet desktop app. You can also use the *Pairing URL* by displaying its QR code and scan from your Android Spark app.
-
-
-**For more detailed instructions on how to use Spark Wallet and the Lightning Network, see the official Spark [documentation](https://github.com/shesek/spark-wallet).**
+For more detailed instructions on how to use Spark Wallet and the Lightning Network, see the official Spark [documentation](https://github.com/shesek/spark-wallet).

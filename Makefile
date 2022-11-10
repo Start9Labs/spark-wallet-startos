@@ -10,6 +10,9 @@ CONFIGURATOR_SRC := $(shell find ./configurator/src) configurator/Cargo.toml con
 
 all: verify
 
+instructions.md: docs/instructions.md
+	cp docs/instructions.md instructions.md
+
 # assumes /etc/embassy/config.yaml exists on local system with `host: "http://embassy-server-name.local"` configured
 install: $(PKG_ID).s9pk
 	embassy-cli package install $(PKG_ID).s9pk
@@ -23,23 +26,18 @@ clean:
 	rm -f image.tar
 	rm -f scripts/*.js
 
-$(PKG_ID).s9pk: manifest.yaml instructions.md image.tar icon.png LICENSE scripts/embassy.js
-	embassy-sdk pack
-
-instructions.md: docs/instructions.md
-	cp docs/instructions.md instructions.md
-
-$(PKG_ID).s9pk: manifest.yaml instructions.md scripts/embassy.js LICENSE docker-images/aarch64.tar docker-images/x86_64.tar
-	if ! [ -z "$(ARCH)" ]; then cp docker-images/$(ARCH).tar image.tar; fi
-	embassy-sdk pack
+scripts/embassy.js: $(TS_FILES)
+	deno bundle scripts/embassy.ts scripts/embassy.js
 
 docker-images/aarch64.tar: Dockerfile docker_entrypoint.sh
 	mkdir -p docker-images
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/arm64 --build-arg PLATFORM=arm64 --build-arg ARCH=aarch64 -o type=docker,dest=docker-images/aarch64.tar .
+	docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/arm64 --build-arg PLATFORM=arm64 --build-arg ARCH=aarch64 -o type=docker,dest=docker-images/aarch64.tar .
 
 docker-images/x86_64.tar: Dockerfile docker_entrypoint.sh
 	mkdir -p docker-images
-	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/amd64 --build-arg PLATFORM=amd64 --build-arg ARCH=x86_64 -o type=docker,dest=docker-images/x86_64.tar .
+	docker buildx build --tag start9/$(PKG_ID)/main:$(PKG_VERSION) --platform=linux/amd64 --build-arg PLATFORM=amd64 --build-arg ARCH=x86_64 -o type=docker,dest=docker-images/x86_64.tar .
 
-scripts/embassy.js: $(TS_FILES)
-	deno bundle scripts/embassy.ts scripts/embassy.js
+$(PKG_ID).s9pk: manifest.yaml LICENSE instructions.md icon.png scripts/embassy.js docker-images/aarch64.tar docker-images/x86_64.tar
+	if ! [ -z "$(ARCH)" ]; then cp docker-images/$(ARCH).tar image.tar; fi
+	embassy-sdk pack
+
