@@ -18,22 +18,22 @@ description:
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain payments.
 release-notes: |
-  * Update Spark Wallet to run on x86_64 architecture
+  * Use new eOS 0.3.3 APIs
+  * Update Spark Wallet wrapper to be able to run on x86_64 architecture
   * Bump upstream spark to 0.3.2-rc
 assets:
   license: LICENSE
   icon: icon.png
   instructions: instructions.md
-  docker-images: image.tar
+containers:
+  main:
+    image: main
+    mounts:
+      main: /root/.spark-wallet
+      c-lightning: /mnt/c-lightning/shared
+    io-format: yaml
 main:
-  type: docker
-  image: main
-  entrypoint: docker_entrypoint.sh
-  args: []
-  mounts:
-    main: /root/.spark-wallet
-    c-lightning: /mnt/c-lightning/shared
-  io-format: yaml
+  type: script
 health-checks:
   web-ui:
     name: Web UI
