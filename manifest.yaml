@@ -31,28 +31,17 @@ containers:
     mounts:
       main: /root/.spark-wallet
       c-lightning: /mnt/c-lightning/shared
-    io-format: yaml
 main:
   type: script
 health-checks:
   web-ui:
     name: Web UI
     success-message: Spark wallet is ready to visit in a web browser
-    type: docker
-    image: main
-    entrypoint: health-check.sh
-    args: ["web"]
-    io-format: json
-    inject: true
+    type: script
   cli:
     name: Command Interface
     success-message: The command line interface is operational
-    type: docker
-    image: main
-    entrypoint: health-check.sh
-    args: ["api"]
-    io-format: json
-    inject: true
+    type: script
 config:
   get:
     type: script
