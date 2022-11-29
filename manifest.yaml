@@ -1,5 +1,5 @@
 id: spark-wallet
-version: 0.3.2.0
+version: 0.3.2
 title: Spark Wallet
 license: MIT
 wrapper-repo: https://github.com/Start9Labs/spark-wallet-wrapper
