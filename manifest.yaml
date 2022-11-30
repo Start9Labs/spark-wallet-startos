@@ -18,9 +18,9 @@ description:
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain payments.
 release-notes: |
+  * Bump upstream Spark to [0.3.2-rc](https://github.com/shesek/spark-wallet/releases/tag/v0.3.2-rc)
   * Use new eOS 0.3.3 APIs
-  * Update Spark Wallet wrapper to be able to run on x86_64 architecture
-  * Bump upstream spark to 0.3.2-rc
+  * Update wrapper to be able to run on x86_64 architecture in addition to aarch64
 assets:
   license: LICENSE
   icon: icon.png
