@@ -18,13 +18,12 @@ description:
     This allows Spark to fully realize the awesome UX enabled by lightning,
     without worrying about the complications and friction of on-chain payments.
 release-notes: |
-  * Bump CLN version allowance to <22.10
+  * Bump CLN version allowance to <23.10
   * Use new eOS rsync backup/restore APIs
 assets:
   license: LICENSE
   icon: icon.png
   instructions: instructions.md
-  docker-images: image.tar
 main:
   type: docker
   image: main
